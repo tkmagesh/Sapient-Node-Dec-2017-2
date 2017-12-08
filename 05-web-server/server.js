@@ -1,10 +1,14 @@
 var http = require('http'),
 	path = require('path'),
-	fs = require('fs');
+	fs = require('fs'),
+	url = require('url');
 
 var server = http.createServer(function(req, res){
-	console.log(req.method + '\t' + req.url);
-	var resourcePath = path.join(__dirname, req.url);
+	var urlObj = url.parse(req.url);
+	console.log(req.method + '\t' + urlObj.pathname);
+	var resourceName = urlObj.pathname === '/' ? '/index.html' : urlObj.pathname;
+
+	var resourcePath = path.join(__dirname, resourceName);
 	if (!fs.existsSync(resourcePath)){
 		res.statusCode = 404;
 		res.end();
