@@ -1,10 +1,11 @@
-var result = 0;
-
-module.exports = {
-	add : function(value){
-		result += value;
-	},
-	getResult : function(){
-		return result;
-	}
-};
+module.exports = function(){
+	var result = 0;
+	return {
+		add : function(value){
+			result += value;
+		},
+		getResult : function(){
+			return result;
+		}
+	};
+}
