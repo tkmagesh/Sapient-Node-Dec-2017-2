@@ -17,6 +17,14 @@ module.exports = function(req, res){
 			return;
 		}
 		var stream = fs.createReadStream(resourcePath);
-		stream.pipe(res);
+		//stream.pipe(res);
+		stream.on('data', function(chunk){
+			console.log('[@serveStatic] data event triggered');
+			res.write(chunk);
+		});
+		stream.on('end', function(){
+			res.end();
+			console.log('[@serveStatic] end event triggered');
+		});
 	}
 }
