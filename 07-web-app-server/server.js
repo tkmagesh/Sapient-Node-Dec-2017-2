@@ -26,7 +26,16 @@ var server = http.createServer(function(req, res){
 		}
 		var stream = fs.createReadStream(resourcePath);
 		stream.pipe(res);
-	} else if (urlObj.pathname === '/calculator'){
+	} else if (urlObj.pathname === '/calculator' && req.method === 'GET'){
+		var data = querystring.parse(urlObj.query),
+			n1 = parseInt(data.n1),
+			n2 = parseInt(data.n2),
+			op = data.op;
+
+		var result = calculator[op](n1, n2);
+		res.write(result.toString());
+		res.end();
+	} else if (urlObj.pathname === '/calculator' && req.method === 'POST'){
 		var data = querystring.parse(urlObj.query),
 			n1 = parseInt(data.n1),
 			n2 = parseInt(data.n2),
