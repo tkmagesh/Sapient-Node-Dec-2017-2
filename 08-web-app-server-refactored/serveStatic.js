@@ -9,17 +9,11 @@ function isStatic(resource){
 
 module.exports = function(req, res, next){
 	var resourceName = req.urlObj.pathname;
-	if (isStatic(resourceName)){
-		var resourcePath = path.join(__dirname, resourceName);
-		if (!fs.existsSync(resourcePath)){
-			res.statusCode = 404;
-			res.end();
-			next();
-		}
+	var resourcePath = path.join(__dirname, resourceName);
+	if (isStatic(resourceName) && fs.existsSync(resourcePath)){
 		var stream = fs.createReadStream(resourcePath);
 		stream.pipe(res);
 		stream.on('end', next);
-		
 	} else {
 		next();
 	}
