@@ -49,8 +49,7 @@ var server = http.createServer(function(req, res){
 			var result = calculator[op](n1, n2);
 			res.write(result.toString());
 			res.end();
-		})
-		
+		});
 	} else {
 		res.statusCode = 404;
 		res.end();
