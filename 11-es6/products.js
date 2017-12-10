@@ -6,7 +6,7 @@ var products = [
 	{id : 1, name : 'Ken', cost : 20, units : 80, category : 'utencil'},
 ];
 
-1. find all the stationary products
-2. find the sum of product value (product value = cost * units) of all products
-3. find the costliest product
-4. apply a discount of 10% to all the grocery products
+1. find all the stationary products (hint : filter)
+2. find the sum of product value (product value = cost * units) of all products (hint : map & reduce)
+3. find the costliest product (hint : reduce)
+4. apply a discount of 10% to all the grocery products (hint : forEach)
