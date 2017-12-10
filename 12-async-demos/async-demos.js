@@ -56,10 +56,23 @@ var pgm = (function(){
 		return promise;
 	}
 
+	/*function addAsyncPromiseClient(x,y){
+		var promise = addAsyncPromise(x,y);
+		promise.then(function(result){
+			console.log(`[@Client] result = ${result}`)
+		});
+	}*/
+
+	async function addAsyncPromiseClient(x,y){
+		var result = await addAsyncPromise(x,y);
+		console.log(`[@Client] result = ${result}`)
+	}
+
+
 	return {
 		addSyncClient : addSyncClient,
 		addAsyncClient : addAsyncClient,
 		addAsyncEvents : addAsyncEvents,
-		addAsyncPromise : addAsyncPromise
+		addAsyncPromiseClient : addAsyncPromiseClient
 	};
 })();

@@ -2,15 +2,26 @@ var express = require('express');
 var router = express.Router();
 var taskService = require('../services/taskService');
 
+//callback based
+/*router.get('/', function(req, res, next) {
+	taskService.getAll(function(taskList){
+		var viewData = {
+		  	tasks : taskList
+		};
+		res.render('tasks/index', viewData);	
+	});
+});
+*/
 
 router.get('/', function(req, res, next) {
-	var taskList = taskService.getAll();
-	var viewData = {
-	  	tasks : taskList
-	};
-	res.render('tasks/index', viewData);
+	taskService.getAll()
+		.then(taskList => {
+			var viewData = {
+			  	tasks : taskList
+			};
+			res.render('tasks/index', viewData);
+		});
 });
-
 router.get('/new', function(req, res, next){
 	res.render('tasks/new');
 });
